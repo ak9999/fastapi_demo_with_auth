@@ -1,0 +1,49 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = "A FastAPI application that leverages Keycloak."
+readme = "README.md"
+authors = [{ name = "Abdullah Khan", email = "abdullah@ajkhan.me" }]
+requires-python = ">=3.14"
+dependencies = [
+    "authlib>=1.7.2",
+    "fastapi>=0.141.1",
+    "httpx>=0.28.1",
+    "itsdangerous>=2.2.0",
+    "pydantic-settings>=2.15.0",
+    "sqlalchemy>=2.0.52",
+    "uvicorn>=0.52.4",
+]
+
+[project.scripts]
+app-dev = "app.cli:run_dev"
+app-prod = "app.cli:run_prod"
+
+[build-system]
+requires = ["uv_build>=0.12.6,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "faker>=40.37.0",
+    "mypy>=2.3.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.16.4",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "--cov=src --cov-report=term-missing"
+
+[tool.coverage.run]
+omit = ["src/app/cli.py"]
+
+[tool.mypy]
+plugins = ["sqlalchemy.ext.mypy.plugin"]
+
+[[tool.mypy.overrides]]
+module = "authlib.*"
+ignore_missing_imports = true

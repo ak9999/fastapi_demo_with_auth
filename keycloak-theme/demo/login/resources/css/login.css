@@ -1,0 +1,76 @@
+/*
+ * Restyles Keycloak's default login page (keycloak.v2, PatternFly v5) to
+ * match this app's "/" page (see src/app/api/root.py): white background,
+ * centered narrow column, system-ui font, blue rounded button. Keycloak's
+ * own form logic (CSRF, MFA, social login, error states) is untouched —
+ * this file only overrides appearance.
+ *
+ * Keycloak's markup/class names can shift between versions. If a style
+ * doesn't take, open devtools on the login page, find the element, and
+ * adjust the matching selector here. Inspect with:
+ *   curl -s "http://localhost:8080/realms/<realm>/protocol/openid-connect/auth?client_id=<id>&response_type=code&redirect_uri=<uri>&scope=openid"
+ */
+
+html,
+body {
+  background: #fff !important;
+  font-family: system-ui, sans-serif !important;
+}
+
+.pf-v5-c-login {
+  background: #fff;
+}
+
+.pf-v5-c-login__container {
+  max-width: 32rem;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+  grid-template-areas: none;
+  grid-template-columns: none;
+}
+
+.pf-v5-c-brand,
+#kc-header-wrapper {
+  color: #111;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.pf-v5-c-title,
+#kc-page-title {
+  font-family: inherit;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.pf-v5-c-login__main-body {
+  text-align: left;
+}
+
+.pf-v5-c-form-control,
+.pf-v5-c-form-control input {
+  font-family: inherit;
+  border-radius: 0.4rem;
+}
+
+.pf-v5-c-button.pf-m-primary {
+  display: inline-block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: #0b5fff !important;
+  border: none;
+  color: #fff;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+}
+
+.pf-v5-c-button.pf-m-primary:hover {
+  background: #0949c9 !important;
+}
+
+a,
+a:visited {
+  color: #0b5fff;
+}

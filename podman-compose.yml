@@ -1,0 +1,16 @@
+services:
+  keycloak:
+    image: docker.io/keycloak/keycloak:latest
+    hostname: keycloak
+    command: start-dev
+    environment:
+      KEYCLOAK_ADMIN: "${KEYCLOAK_ADMIN:-admin}"
+      KEYCLOAK_ADMIN_PASSWORD: "${KEYCLOAK_ADMIN_PASSWORD:-admin}"
+    ports:
+      - "8080:8080"
+    volumes:
+      - keycloak-data:/opt/keycloak/data
+      - ./keycloak-theme/demo:/opt/keycloak/themes/demo:z
+
+volumes:
+  keycloak-data:
